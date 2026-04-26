@@ -111,7 +111,7 @@ ax.plot(
     days_df["count_cr"],
     marker='o', 
     linewidth=2,
-    color="#278f02"
+    color="#005461"
 )
 ax.tick_params(axis='y', labelsize=20)
 ax.tick_params(axis='x', labelsize=15)
@@ -120,14 +120,14 @@ st.pyplot(fig)
 st.subheader("Pada rentang waktu manakah permintaan sewa sepeda mencapai puncak dan titik terendahnya?")
 fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(35, 15))
 
-sns.barplot(x="hours", y="count_cr", data=sum_order_items_df.head(5), palette=["#F4C2C2", "#F4C2C2", "#CD5E77", "#F4C2C2", "#F4C2C2"], ax=ax[0])
+sns.barplot(x="hours", y="count_cr", data=sum_order_items_df.head(5), palette=["#00B7B5", "#00B7B5", "#005461", "#00B7B5", "#00B7B5"], ax=ax[0])
 ax[0].set_ylabel(None)
 ax[0].set_xlabel("Hours (PM)", fontsize=30)
 ax[0].set_title("Jam dengan banyak penyewa sepeda", loc="center", fontsize=30)
 ax[0].tick_params(axis='y', labelsize=35)
 ax[0].tick_params(axis='x', labelsize=30)
  
-sns.barplot(x="hours", y="count_cr", data=sum_order_items_df.sort_values(by="hours", ascending=True).head(5), palette=["#F4C2C2", "#F4C2C2", "#F4C2C2", "#F4C2C2","#CD5E77"], ax=ax[1])
+sns.barplot(x="hours", y="count_cr", data=sum_order_items_df.sort_values(by="hours", ascending=True).head(5), palette=["#00B7B5", "#00B7B5", "#00B7B5", "#00B7B5","#005461"], ax=ax[1])
 ax[1].set_ylabel(None)
 ax[1].set_xlabel("Hours (AM)",  fontsize=30)
 ax[1].set_title("Jam dengan sedikit penyewa sepeda", loc="center", fontsize=30)
@@ -140,7 +140,7 @@ ax[1].tick_params(axis='x', labelsize=30)
 st.pyplot(fig)
 st.subheader("Pada musim apa tingkat penggunaan layanan sewa sepeda cenderung meningkat?")
 
-colors = ["#F4C2C2", "#F4C2C2", "#F4C2C2", "#CD5E77"]
+colors = ["#00B7B5", "#00B7B5", "#00B7B5", "#005461"]
 fig, ax = plt.subplots(figsize=(20, 10))
 sns.barplot(
         y="count_cr", 
@@ -155,4 +155,3 @@ ax.set_xlabel(None)
 ax.tick_params(axis='x', labelsize=35)
 ax.tick_params(axis='y', labelsize=30)
 st.pyplot(fig)
-
