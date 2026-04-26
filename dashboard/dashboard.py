@@ -41,6 +41,22 @@ def macem_season (day_df):
     season_df = day_df.groupby(by="season").count_cr.sum().reset_index() 
     return season_df
 
+def create_rfm_recap(hour_df):
+    rfm_df = hour_df.groupby(by="hours", as_index=False).agg({
+    "dteday": "max",
+    "instant": "nunique",
+    "count_cr": "sum"
+    })
+    rfm_df.columns = ["hours", "last_order_date", "order_count", "revenue"]
+    # perhitungan recency per hari
+    rfm_df["last_order_date"] = rfm_df["last_order_date"].dt.date
+    recent_date = hour_df["dteday"].dt.date.max()
+    rfm_df["recency"] = rfm_df["last_order_date"].apply(lambda x: (recent_date - x).days)
+    
+    # Drop kolom 'last_order_date'
+    rfm_df.drop("last_order_date", axis=1, inplace=True)
+    return rfm_df
+  
 days_df = pd.read_csv("dashboard/day_clean.csv")
 hours_df = pd.read_csv("dashboard/hour_clean.csv")
 
@@ -153,3 +169,65 @@ ax.set_xlabel(None)
 ax.tick_params(axis='x', labelsize=35)
 ax.tick_params(axis='y', labelsize=30)
 st.pyplot(fig)
+
+#Subheader RFM Overview
+st.subheader('RFM Overview')
+ 
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    top_recency = rfm_recap_df.sort_values(by="recency", ascending=True).head(5)
+    #membuat bar plot RFM
+    fig, ax = plt.subplots(figsize=(10, 6))
+    
+    #plot top recency
+    sns.barplot(
+        data=top_recency,
+        x="hours",
+        y="recency",
+        color='#00B7B5',
+        ax=ax
+    )
+    
+    ax.set_ylabel(None)
+    ax.set_xlabel(None)
+    ax.set_title("Recency (days)", loc="center", fontsize=50)
+    ax.tick_params(axis ='x', labelsize=35)
+    ax.tick_params(axis='y', labelsize=30)
+    st.pyplot(fig)
+    
+with col2:
+    top_frequency = rfm_recap_df.sort_values(by="order_count", ascending=False).head(5)
+    fig, ax = plt.subplots(figsize=(10, 6))
+    #plot top frequency
+    sns.barplot(
+    data=top_frequency,
+    x="hours",
+    y="order_count",
+    color='#00B7B5',
+    ax=ax
+    )
+    ax.set_ylabel(None)
+    ax.set_xlabel(None)
+    ax.set_title("Frequency", loc="center", fontsize=50)
+    ax.tick_params(axis='x', labelsize=35) 
+    ax.tick_params(axis='y', labelsize=30)  
+    st.pyplot(fig) 
+    
+with col3:
+    top_monetary = rfm_recap_df.sort_values(by="revenue", ascending=False).head(5)    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    #plot top monetary
+    sns.barplot(
+    data=top_monetary,
+    x="hours",
+    y="revenue",
+    color='#00B7B5',
+    ax=ax
+    )
+    ax.set_ylabel(None)
+    ax.set_xlabel(None)
+    ax.set_title("Monetary", loc="center", fontsize=50)
+    ax.tick_params(axis='x', labelsize=35)
+    ax.tick_params(axis='y', labelsize=30)
+    st.pyplot(fig)
