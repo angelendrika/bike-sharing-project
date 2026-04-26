@@ -100,6 +100,7 @@ reg_df = total_registered_df(main_df_days)
 cas_df = total_casual_df(main_df_days)
 sum_order_items_df = sum_order(main_df_hour)
 season_df = macem_season(main_df_hour)
+rfm_recap_df = create_rfm_recap(main_df_hour)
 
 #Melengkapi Dashboard dengan Berbagai Visualisasi Data
 st.header('Bike Sharing :sparkles:')
