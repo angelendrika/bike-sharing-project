@@ -87,8 +87,6 @@ season_df = macem_season(main_df_hour)
 
 #Melengkapi Dashboard dengan Berbagai Visualisasi Data
 st.header('Bike Sharing :sparkles:')
-
-st.subheader('Daily Sharing')
 col1, col2, col3 = st.columns(3)
  
 with col1:
