@@ -165,11 +165,11 @@ sns.barplot(
     ax=ax,
     legend=False
 )
-ax.set_title("Grafik Antar Musim", loc="center", fontsize=50)
+ax.set_title("Grafik Antar Musim", loc="center", fontsize=30)
 ax.set_ylabel(None)
 ax.set_xlabel(None)
-ax.tick_params(axis='x', labelsize=35)
-ax.tick_params(axis='y', labelsize=30)
+ax.tick_params(axis='x', labelsize=25)
+ax.tick_params(axis='y', labelsize=20)
 st.pyplot(fig)
 
 # --- Visualisasi 4: RFM Overview ---
