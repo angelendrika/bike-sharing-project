@@ -157,13 +157,13 @@ colors_season = ["#D3D3D3", "#018790", "#005461", "#00B7B5"]
 
 fig, ax = plt.subplots(figsize=(20, 10))
 sns.barplot(
-    y="count_cr", 
+    y="count_cr",
     x="season",
     data=main_df_days.sort_values(by="season", ascending=False),
     hue="season",
-    palette=colors_season,
-    legend=False,
-    ax=ax
+    palette=colors,
+    ax=ax,
+    legend=False
 )
 ax.set_title("Grafik Antar Musim", loc="center", fontsize=50)
 ax.set_ylabel(None)
