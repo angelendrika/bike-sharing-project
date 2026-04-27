@@ -120,7 +120,7 @@ with col3:
 # Visualisasi 1: Tren Bulanan (Pertanyaan 1)
 st.subheader("Tren Pertumbuhan Total Penyewaan Sepeda (2011-2012)")
 # Resample data bulanan seperti di notebook
-monthly_trend_df = main_df_days.resample(rule='M', on='dteday').agg({"count_cr": "sum"}).reset_index()
+monthly_trend_df = main_df_days.resample(rule='ME', on='dteday').agg({"count_cr": "sum"}).reset_index()
 
 fig, ax = plt.subplots(figsize=(16, 8))
 ax.plot(
