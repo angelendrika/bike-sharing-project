@@ -58,9 +58,9 @@ def create_rfm_recap(hour_df):
     rfm_df.drop("last_order_date", axis=1, inplace=True)
     return rfm_df
 
-# Load data yang sudah dibersihkan (hasil dari cell terakhir notebook)
-days_df = pd.read_csv("day_clean.csv")
-hours_df = pd.read_csv("hour_clean.csv")
+# Load data yang sudah dibersihkan
+days_df = pd.read_csv("dashboard/day_clean.csv")
+hours_df = pd.read_csv("dashboard/hour_clean.csv")
 
 # Konversi kolom tanggal
 datetime_columns = ["dteday"]
