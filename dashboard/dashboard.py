@@ -153,23 +153,29 @@ st.pyplot(fig)
 
 # --- Visualisasi 3: Berdasarkan Musim ---
 st.subheader("Tingkat Penggunaan Layanan Sewa Sepeda Berdasarkan Musim")
-colors_season = ["#D3D3D3", "#018790", "#005461", "#00B7B5"]
+
+season_order = ["Spring", "Summer", "Fall", "Winter"]
+colors = ["#D3D3D3", "#018790", "#005461", "#00B7B5"]
 
 fig, ax = plt.subplots(figsize=(20, 10))
+
 sns.barplot(
     y="count_cr", 
     x="season",
-    data=main_df_days.sort_values(by="season", ascending=False),
-    hue="season",
-    palette=colors_season,
+    data=main_df_days, 
+    order=season_order,
+    palette=colors,
     ax=ax,
+    hue="season", 
     legend=False
 )
+
 ax.set_title("Grafik Antar Musim", loc="center", fontsize=30)
 ax.set_ylabel(None)
 ax.set_xlabel(None)
 ax.tick_params(axis='x', labelsize=25)
 ax.tick_params(axis='y', labelsize=20)
+
 st.pyplot(fig)
 
 # --- Visualisasi 4: RFM Overview ---
